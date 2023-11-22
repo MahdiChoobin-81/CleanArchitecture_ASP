@@ -9,4 +9,4 @@ public record AddUserCommand(
     string FullName,
     string Username,
     string Password,
-    string Email) : IRequest<Result<User>>;
+    string Email) : IRequest<Result<User?>>;

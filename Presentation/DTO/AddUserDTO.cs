@@ -1,4 +1,4 @@
-namespace WebApi2.DTO;
+namespace Presentation.DTO;
 
 public class AddUserDTO
 {

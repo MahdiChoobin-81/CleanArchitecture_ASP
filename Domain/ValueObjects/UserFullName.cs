@@ -9,12 +9,12 @@ public record UserFullName
     private const byte MaxLenght = 50;
     
 
+    public string Value { get; }
     private UserFullName(string value)
     {
         Value = value;
     }
     
-    public string Value { get; }
 
 
     public static Result<UserFullName> Create(string value)

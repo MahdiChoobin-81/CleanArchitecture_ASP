@@ -5,8 +5,8 @@ namespace Movie_asp.ValueObjects;
 // [ComplexType]
 public record Password
 {
-    public const byte MinLength = 8;
-    public const byte MaxLength = 30;
+    private const byte MinLength = 8;
+    private const byte MaxLength = 30;
     public string Value { get; }
     private Password(string value)
     {

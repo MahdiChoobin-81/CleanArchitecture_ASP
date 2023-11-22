@@ -1,5 +1,6 @@
 ﻿using Application.Data;
 using Domain.Entities;
+using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Movie_asp.Entities;
 using Movie_asp.ValueObjects;
@@ -16,6 +17,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        
         modelBuilder.Entity<User>()
             .HasKey(i => i.Id);
 
@@ -26,35 +28,36 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWor
                 value => new UserId(value)
                 );
         
-        // modelBuilder.Entity<User>()
-        //     .Property(u => u.Username)
-        //     .HasConversion(
-        //         userId => userId.Value,
-        //         value => Username.Create(value)
-        //     );
-        
-        
-        modelBuilder.Entity<User>(u => u.ComplexProperty(p => p.CreatedAt));
-        
-        // modelBuilder.Entity<User>()
-        //     .Property(u => u.CreatedAt)
-        //     .HasConversion(
-        //         CreatedAt => CreatedAt.Value,
-        //         value => new CreatedAt(value)
-        //     );
-
-
-        // modelBuilder.Entity<User>().ComplexProperty(u => u.Email);
-
-
-        // modelBuilder.Entity<User>(u =>
-        // {
-        //     u.ComplexProperty(p => p.CreatedAt);
-        //     u.ComplexProperty(p => p.Email);
-        //     u.ComplexProperty(p => p.Password);
-        //     u.ComplexProperty(p => p.FullName);
-        //     u.ComplexProperty(p => p.Username);
-        // });
+        modelBuilder.Entity<User>()
+            .Property(u => u.CreatedAt)
+            .HasConversion(
+                createdAt => createdAt.Value,
+                value => new CreatedAt(value)
+            );
+        modelBuilder.Entity<User>()
+            .Property(u => u.Username)
+            .HasConversion(
+                username => username.Value,
+                value => null
+                );
+        modelBuilder.Entity<User>()
+            .Property(u => u.Password)
+            .HasConversion(
+                password => password.Value,
+                value => null
+            );
+        modelBuilder.Entity<User>()
+            .Property(u => u.Email)
+            .HasConversion(
+                email => email.Value,
+                value => null
+            );
+        modelBuilder.Entity<User>()
+            .Property(u => u.FullName)
+            .HasConversion(
+                userFullName => userFullName.Value,
+                value => null
+            );
 
 
     }

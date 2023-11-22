@@ -12,10 +12,10 @@ public class User
     public Email Email { get; private set; }
     public CreatedAt CreatedAt { get; private set; }
 
-    public User(UserId id, UserFullName userFullName, Username username, Password password, Email email, CreatedAt createdAt)
+    public User(UserId id, UserFullName fullName, Username username, Password password, Email email, CreatedAt createdAt)
     {
         Id = id;
-        FullName = userFullName;
+        FullName = fullName;
         Username = username;
         Password = password;
         Email = email;
