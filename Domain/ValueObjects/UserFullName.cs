@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using FluentResults;
 
 namespace Movie_asp.ValueObjects;
-// [ComplexType]
 public record UserFullName
 {
     private const byte MaxLenght = 50;
@@ -14,10 +13,19 @@ public record UserFullName
     {
         Value = value;
     }
-    
+
+    public static UserFullName GetUserFullName(string value)
+    {
+        return new UserFullName(value);
+    }
+
+    public static UserFullName Create2(string value)
+    {
+        return new UserFullName(value);
+    }
 
 
-    public static Result<UserFullName> Create(string value)
+    public static Result<UserFullName?> Create(string value)
     {
         
         if (string.IsNullOrWhiteSpace(value))

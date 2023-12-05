@@ -16,7 +16,7 @@ public record Username
         Value = value;
     }
 
-    public static Result<Username> Create(string value)
+    public static Result<Username?> Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {

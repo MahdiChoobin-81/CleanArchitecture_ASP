@@ -4,7 +4,7 @@ using Movie_asp.Entities;
 
 namespace Application.Data;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IUnitOfWork
 {
     public DbSet<User> Users { get; set; }
 

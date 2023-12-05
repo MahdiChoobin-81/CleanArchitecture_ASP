@@ -1,11 +1,11 @@
 using System.Reflection;
 using Application.Data;
 using Application.Users.Commands;
-using Domain.Repositories;
 using Infrastructure;
 using Infrastructure.Repositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Movie_asp.Repositories;
 using Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,10 +18,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-builder.Services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(AddUserCommandHandler).GetTypeInfo().Assembly));
-builder.Services.AddSingleton<IApplicationDbContext, ApplicationDbContext>();
-builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(AddUserCommand).GetTypeInfo().Assembly));
+builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 // builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

@@ -15,8 +15,10 @@ public record Email
     {
         Value = email;
     }
-    public static Result<Email> Create(string email)
+    public static Result<Email?> Create(string email)
     {
+        if (string.IsNullOrWhiteSpace(email))
+                    return Result.Fail("Email cannot be empty.");
         
         Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
         Match match = regex.Match(email);
@@ -25,8 +27,7 @@ public record Email
             return Result.Fail("Email Address is in a wrong pattern.");
         }
     
-        if (string.IsNullOrWhiteSpace(email))
-            return Result.Fail("Email cannot be empty.");
+        
     
         return new Email(email);
     }

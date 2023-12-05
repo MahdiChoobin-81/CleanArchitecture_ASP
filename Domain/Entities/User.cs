@@ -23,6 +23,17 @@ public class User
     
     }
 
+    public void Update(UserFullName userFullName, Username username, Password password, Email email)
+    {
+        FullName = userFullName;
+        Username = username;
+        Password = password;
+        Email = email;
+    }
+    
+    
+    
+
 
 
 }

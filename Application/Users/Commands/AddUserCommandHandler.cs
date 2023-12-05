@@ -1,21 +1,22 @@
-using System.ComponentModel.DataAnnotations;
+
 using Application.Data;
-using Application.Validation;
+using Application.Dto.Results;
+using Application.Users.Query;
+using Application.Validations;
 using Domain.Entities;
-using Domain.Repositories;
 using FluentResults;
 using MediatR;
 using Movie_asp.Entities;
+using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
 
 namespace Application.Users.Commands;
 
-public class AddUserCommandHandler : IRequestHandler<AddUserCommand, Result<User?>>
+internal sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserResultDto>
 {
 
     private readonly IUserRepository _userRepository;
     private readonly IUnitOfWork _unitOfWork;
-
     
     public AddUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
     {
@@ -24,35 +25,31 @@ public class AddUserCommandHandler : IRequestHandler<AddUserCommand, Result<User
     }
     
     
-    public async Task<Result<User?>> Handle(AddUserCommand request, CancellationToken cancellationToken)
+    public async Task<UserResultDto> Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
+        var id = new UserId(Guid.NewGuid());
         var fullNameResult = UserFullName.Create(request.FullName);
         var usernameResult = Username.Create(request.Username);
         var passwordResult = Password.Create(request.Password);
-        var emailResult = Email.Create(request.Email);
+        var emailResult    = Email.Create(request.Email);
+        var createdAt = new CreatedAt(DateTime.Now);
 
-        var validation = AddUserValidation.IsValid(fullNameResult, usernameResult, passwordResult, emailResult);
 
+
+        var validation = UserValidation.IsValid(id, fullNameResult, usernameResult, passwordResult, emailResult, createdAt);
+        
         if (validation.IsFailed)
         {
             return validation;
         }
 
-        var user = new User(
-            new UserId(Guid.NewGuid()),
-            fullNameResult.Value,
-            usernameResult.Value,
-            passwordResult.Value,
-            emailResult.Value,
-            new CreatedAt(DateTime.Now)
-            );
+        var user = validation.User;
+         _userRepository.Add(user);
         
-        _userRepository.Add(user);
-        
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
+         await _unitOfWork.SaveChangesAsync(cancellationToken);
         
         
-        
-        return user;
+         return validation;
+  
     }
 }

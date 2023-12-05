@@ -13,7 +13,7 @@ public record Password
         Value = value;
     }
 
-    public static Result<Password> Create(string value)
+    public static Result<Password?> Create(string value)
     {
         if(string.IsNullOrWhiteSpace(value))
             return Result.Fail("Password cannot be empty.");

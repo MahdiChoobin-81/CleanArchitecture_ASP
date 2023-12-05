@@ -1,20 +1,22 @@
 using Application.Data;
+using Application.Dto.Results;
 using Application.Users.Commands;
-using Domain.Entities;
-using Domain.Repositories;
+using Application.Users.Query;
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Movie_asp.Entities;
-using Presentation.DTO;
+using Movie_asp.Repositories;
+using Movie_asp.ValueObjects;
+using Presentation.Dto;
 
 namespace Presentation.Controllers;
 
     [Route("api/[controller]")]
     [ApiController]
 
-public class UserController
+public class UserController : ControllerBase
 {
     
     
@@ -27,20 +29,80 @@ public class UserController
     }
 
 
-    [HttpPost]
-    public async Task<Result<User?>> Create([FromBody] AddUserDTO value)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<UserResultDto>> GetById(Guid id)
     {
+        var result = await _mediator.Send(new GetUserByIdQuery(new UserId(id)));
+
+        if (result.IsFailed)
+        {
+            return NotFound(result);
+        }
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public async Task<IEnumerable<User>> GetAll()
+    {
+        return await _mediator.Send(new GetAllUsersQuery());
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<UserResultDto>> Post([FromBody] AddUserDto value)
+     {
         var command = new AddUserCommand(
             value.FullName,
             value.Username,
             value.Password,
             value.Email
             );
-         await _mediator.Send(command);
+        UserResultDto result = await _mediator.Send(command);
 
-
-        return  null;
+        if (result.IsFailed)
+        {
+            return BadRequest(result);
+        }
+        return CreatedAtAction(nameof(GetById), new{ id = result.User.Id.Value}, result.User);
     }
+    
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult<UserResultDto>> Delete(Guid id)
+    {
+        var result = await _mediator.Send(new DeleteUserCommand(new UserId(id)));
+
+        if (result.IsFailed)
+        {
+            return NotFound(result);
+        }
+        
+        return Ok(result);
+    }
+    
+    
+    [HttpPut("{id}")]
+    public async Task<ActionResult<UserResultDto>> Put(Guid id,[FromBody] UpdateUserDTO value)
+    {
+        var command = new UpdateUserCommand(
+            new UserId(id),
+            value.FullName,
+            value.Username,
+            value.Password,
+            value.Email
+            );
+    
+        var result = await _mediator.Send(command);
+
+        if (result.IsFailed)
+        {
+            return BadRequest(result);
+        }
+    
+        return Ok(result);
+    }
+    
+    
+    
 
     
     

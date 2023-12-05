@@ -5,7 +5,7 @@ namespace Infrastructure;
 public sealed class UnitOfWork : IUnitOfWork
 {
     private readonly IApplicationDbContext _dbContext;
-
+    
     public UnitOfWork(IApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
@@ -16,4 +16,6 @@ public sealed class UnitOfWork : IUnitOfWork
     {
         return _dbContext.SaveChangesAsync(cancellationToken);
     }
+
+
 }
