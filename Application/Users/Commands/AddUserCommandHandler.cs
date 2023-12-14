@@ -3,12 +3,12 @@ using Application.Data;
 using Application.Dto.Results;
 using Application.Users.Query;
 using Application.Validations;
-using Domain.Entities;
 using FluentResults;
 using MediatR;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.User;
 
 namespace Application.Users.Commands;
 
@@ -27,8 +27,8 @@ internal sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, Us
     
     public async Task<UserResultDto> Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
-        var id = new UserId(Guid.NewGuid());
-        var fullNameResult = UserFullName.Create(request.FullName);
+        var id = new Id(Guid.NewGuid());
+        var fullNameResult = FullName.Create(request.FullName);
         var usernameResult = Username.Create(request.Username);
         var passwordResult = Password.Create(request.Password);
         var emailResult    = Email.Create(request.Email);

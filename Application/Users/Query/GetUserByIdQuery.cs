@@ -6,4 +6,4 @@ using Movie_asp.ValueObjects;
 
 namespace Application.Users.Query;
 
-public record GetUserByIdQuery(UserId UserId) : IRequest<UserResultDto>;
+public record GetUserByIdQuery(Id Id) : IRequest<UserResultDto>;

@@ -16,14 +16,11 @@ namespace Presentation.Controllers;
     [Route("api/[controller]")]
     [ApiController]
 
-public class UserController : ControllerBase
+public class UserController : Controller
 {
-    
-    
-    
     private IMediator _mediator;
 
-    public UserController(IMediator mediator, IUserRepository userRepository, IUnitOfWork unitOfWork)
+    public UserController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -32,7 +29,7 @@ public class UserController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<UserResultDto>> GetById(Guid id)
     {
-        var result = await _mediator.Send(new GetUserByIdQuery(new UserId(id)));
+        var result = await _mediator.Send(new GetUserByIdQuery(new Id(id)));
 
         if (result.IsFailed)
         {
@@ -69,7 +66,7 @@ public class UserController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<ActionResult<UserResultDto>> Delete(Guid id)
     {
-        var result = await _mediator.Send(new DeleteUserCommand(new UserId(id)));
+        var result = await _mediator.Send(new DeleteUserCommand(new Id(id)));
 
         if (result.IsFailed)
         {
@@ -81,10 +78,10 @@ public class UserController : ControllerBase
     
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<UserResultDto>> Put(Guid id,[FromBody] UpdateUserDTO value)
+    public async Task<ActionResult<UserResultDto>> Put(Guid id,[FromBody] UpdateUserDto value)
     {
         var command = new UpdateUserCommand(
-            new UserId(id),
+            new Id(id),
             value.FullName,
             value.Username,
             value.Password,

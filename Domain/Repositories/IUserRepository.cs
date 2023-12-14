@@ -5,13 +5,13 @@ namespace Movie_asp.Repositories;
 
 public interface IUserRepository 
 {
-    void Add(User? user);
+    void Add(User user);
 
     void Remove(User user);
 
     void Update(User user);
 
-    Task<User?> GetByIdAsync(UserId id);
+    Task<User?> GetByIdAsync(Id id);
 
     Task<IEnumerable<User>> GetAllAsync();
 

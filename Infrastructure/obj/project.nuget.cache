@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "neo0fY59OFe1e5UgnS1z4KQ6o7jsXa+gV1ey8uyNdPgExOruuo8o/8VCUYKWT1oZRVds1TphRlncy2x0h1jjvg==",
+  "dgSpecHash": "I0LZUS6WrlMX+EBffcj/1r7XFRRKoZeMsUy1Qefbk2nO03XcPBpwf9tBb96fF3LgCvhPg5okSw5W+I6/BOAY+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sepidar\\RiderProjects\\Movie_asp\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.entityframeworkcore.design\\8.0.0\\microsoft.entityframeworkcore.design.8.0.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\8.0.0\\microsoft.entityframeworkcore.relational.8.0.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\8.0.0\\microsoft.entityframeworkcore.sqlserver.8.0.0.nupkg.sha512",
+    "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.0\\microsoft.entityframeworkcore.tools.8.0.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.extensions.caching.memory\\8.0.0\\microsoft.extensions.caching.memory.8.0.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

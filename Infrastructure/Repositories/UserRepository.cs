@@ -1,5 +1,4 @@
 using Application.Data;
-using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
@@ -32,7 +31,7 @@ public class UserRepository : IUserRepository
         _context.Users.Update(user);
     }
 
-    public Task<User?> GetByIdAsync(UserId id)
+    public Task<User?> GetByIdAsync(Id id)
     {
         return _context.Users.FirstOrDefaultAsync(c => c.Id == id);
     }

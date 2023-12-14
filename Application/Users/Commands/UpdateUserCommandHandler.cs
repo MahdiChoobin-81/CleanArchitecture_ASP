@@ -6,6 +6,7 @@ using MediatR;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.User;
 
 namespace Application.Users.Commands;
 
@@ -24,7 +25,7 @@ internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserComma
     public async Task<UserResultDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
         
-        var findUser = UserValidation.FindUser(_userRepository, request.UserId).Result;
+        var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
         
         if (findUser.IsFailed)
         {
@@ -35,7 +36,7 @@ internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserComma
         
 
         var id = user.Id;
-        var fullNameResult = UserFullName.Create(request.FullName);
+        var fullNameResult = FullName.Create(request.FullName);
         var usernameResult = Username.Create(request.Username);
         var passwordResult = Password.Create(request.Password);
         var emailResult = Email.Create(request.Email);

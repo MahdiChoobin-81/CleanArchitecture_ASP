@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Movie_asp.Entities;
 using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.User;
 
 namespace Infrastructure.Configurations;
 
@@ -9,12 +10,19 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
+        
+        builder.Property(u => u.Email)
+            .HasConversion(
+                email => email.Value,
+                value => Email.Create(value).Value!
+            );
+        
         builder.HasKey(i => i.Id);
 
         builder.Property(u => u.Id)
             .HasConversion(
                 userId => userId.Value,
-                value => new UserId(value)
+                value => new Id(value)
             );
         
         builder.Property(u => u.CreatedAt)
@@ -35,15 +43,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                 password => password.Value,
                 value => Password.Create(value).Value!
             );
-        builder.Property(u => u.Email)
-            .HasConversion(
-                email => email.Value,
-                value => Email.Create(value).Value!
-            );
+        
         builder.Property(u => u.FullName)
             .HasConversion(
                 userFullName => userFullName.Value,
-                value => UserFullName.Create(value).Value!
+                value => FullName.Create(value).Value!
             );
 
         builder.HasIndex(u => u.Email).IsUnique();

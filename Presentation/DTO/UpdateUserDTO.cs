@@ -1,6 +1,6 @@
 namespace Presentation.Dto;
 
-public class UpdateUserDTO
+public class UpdateUserDto
 {
     public string FullName { get; set; }
     public string Username { get; set; }

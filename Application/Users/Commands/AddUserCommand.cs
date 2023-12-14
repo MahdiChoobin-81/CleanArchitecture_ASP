@@ -1,5 +1,4 @@
 using Application.Dto.Results;
-using Domain.Entities;
 using FluentResults;
 using MediatR;
 using Movie_asp.Entities;

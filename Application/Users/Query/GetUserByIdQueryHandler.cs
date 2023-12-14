@@ -21,7 +21,7 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserRes
     {
     
         
-        var findUser = UserValidation.FindUser(_userRepository, request.UserId).Result;
+        var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
         
         if (findUser.IsFailed)
         {

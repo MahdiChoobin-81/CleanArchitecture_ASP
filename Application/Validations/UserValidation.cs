@@ -3,6 +3,7 @@ using FluentResults;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.User;
 
 namespace Application.Validations;
 
@@ -11,9 +12,9 @@ public static class UserValidation
 
     
 
-    public static async Task<Result<User>> FindUser(IUserRepository userRepository,UserId userId)
+    public static async Task<Result<User>> FindUser(IUserRepository userRepository,Id id)
     {
-        var user = await userRepository.GetByIdAsync(userId);
+        var user = await userRepository.GetByIdAsync(id);
 
         if (user is null)
         {
@@ -23,7 +24,7 @@ public static class UserValidation
         return Result.Ok(user);
     }
     
-    public static UserResultDto IsValid(UserId id, Result<UserFullName> fullName,
+    public static UserResultDto IsValid(Id id, Result<FullName> fullName,
         Result<Username> username, Result<Password> password, Result<Email> email, CreatedAt createdAt)
     {
         if (fullName.IsFailed)

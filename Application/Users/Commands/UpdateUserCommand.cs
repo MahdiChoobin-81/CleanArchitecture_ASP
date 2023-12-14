@@ -7,7 +7,7 @@ using Movie_asp.ValueObjects;
 namespace Application.Users.Commands;
 
 public record UpdateUserCommand(
-    UserId UserId,
+    Id Id,
     string FullName,
     string Username,
     string Password,
