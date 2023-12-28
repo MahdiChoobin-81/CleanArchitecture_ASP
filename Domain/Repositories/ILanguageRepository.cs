@@ -3,15 +3,7 @@ using Movie_asp.ValueObjects;
 
 namespace Movie_asp.Repositories;
 
-public interface ILanguageRepository
+public interface ILanguageRepository : IRepository<Language>
 {
-    void Add(Language language);
 
-    void Remove(Language language);
-
-    void Update(Language language);
-
-    Task<Language?> GetByIdAsync(Id id);
-
-    Task<IEnumerable<Language>> GetAllAsync();
 }

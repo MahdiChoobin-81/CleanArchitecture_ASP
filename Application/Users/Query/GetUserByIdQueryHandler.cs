@@ -20,8 +20,8 @@ public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserRes
     public async Task<UserResultDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
     
-        
-        var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
+        // TODO: find a better way to configure this validation.
+        var findUser =  UserValidation.FindUser(_userRepository, request.Id).Result;
         
         if (findUser.IsFailed)
         {

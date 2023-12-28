@@ -22,39 +22,19 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Movie_asp.Entities.Actor", b =>
+            modelBuilder.Entity("GenreMovie", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("GenresId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Img")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("nvarchar(120)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Country", b =>
-                {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("MoviesId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CountryName")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                    b.HasKey("GenresId", "MoviesId");
 
-                    b.HasKey("Id");
+                    b.HasIndex("MoviesId");
 
-                    b.ToTable("Countries");
+                    b.ToTable("GenreMovie");
                 });
 
             modelBuilder.Entity("Movie_asp.Entities.Genre", b =>
@@ -70,41 +50,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Language", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LanguageName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Languages");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.MoiveImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("nvarchar(120)");
-
-                    b.Property<Guid>("MovieId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("MoiveImage");
                 });
 
             modelBuilder.Entity("Movie_asp.Entities.Movie", b =>
@@ -145,34 +90,24 @@ namespace Infrastructure.Migrations
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Movie_asp.Entities.MovieCollection", b =>
+            modelBuilder.Entity("Movie_asp.Entities.MovieImage", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
                     b.Property<Guid>("MovieId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("Id");
 
-                    b.Property<Guid>("GenreId")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasIndex("MovieId");
 
-                    b.Property<Guid>("LanguageId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ActorId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("MovieId", "CountryId", "GenreId", "LanguageId", "ActorId");
-
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("GenreId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("MovieCollections");
+                    b.ToTable("MovieImages");
                 });
 
             modelBuilder.Entity("Movie_asp.Entities.User", b =>
@@ -211,7 +146,22 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Movie_asp.Entities.MoiveImage", b =>
+            modelBuilder.Entity("GenreMovie", b =>
+                {
+                    b.HasOne("Movie_asp.Entities.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenresId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Movie_asp.Entities.Movie", null)
+                        .WithMany()
+                        .HasForeignKey("MoviesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Movie_asp.Entities.MovieImage", b =>
                 {
                     b.HasOne("Movie_asp.Entities.Movie", "Movie")
                         .WithMany("MoiveImages")
@@ -222,74 +172,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("Movie_asp.Entities.MovieCollection", b =>
-                {
-                    b.HasOne("Movie_asp.Entities.Actor", "Actor")
-                        .WithMany("MovieCollections")
-                        .HasForeignKey("ActorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Movie_asp.Entities.Country", "Country")
-                        .WithMany("MovieCollection")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Movie_asp.Entities.Genre", "Genre")
-                        .WithMany("MovieCollection")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Movie_asp.Entities.Language", "Language")
-                        .WithMany("MovieCollections")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Movie_asp.Entities.Movie", "Moive")
-                        .WithMany("MovieCollection")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Actor");
-
-                    b.Navigation("Country");
-
-                    b.Navigation("Genre");
-
-                    b.Navigation("Language");
-
-                    b.Navigation("Moive");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Actor", b =>
-                {
-                    b.Navigation("MovieCollections");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Country", b =>
-                {
-                    b.Navigation("MovieCollection");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Genre", b =>
-                {
-                    b.Navigation("MovieCollection");
-                });
-
-            modelBuilder.Entity("Movie_asp.Entities.Language", b =>
-                {
-                    b.Navigation("MovieCollections");
-                });
-
             modelBuilder.Entity("Movie_asp.Entities.Movie", b =>
                 {
                     b.Navigation("MoiveImages");
-
-                    b.Navigation("MovieCollection");
                 });
 #pragma warning restore 612, 618
         }

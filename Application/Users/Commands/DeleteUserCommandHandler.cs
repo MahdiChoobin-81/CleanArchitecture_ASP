@@ -22,12 +22,14 @@ internal sealed class DeleteUserCommandHandler : IRequestHandler<DeleteUserComma
     public async Task<UserResultDto> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
 
+        // TODO : Better way to find user like DeleteMovieCommandHandler.cs
         var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
         
         if (findUser.IsFailed)
         {
             return findUser.ToResult().ToUserResultDto(null);
         }
+        
         
         var user = findUser.Value;
         _userRepository.Remove(user);

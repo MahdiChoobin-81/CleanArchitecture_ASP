@@ -35,7 +35,7 @@ public record Image
             return new Image(value);
         }
 
-        return Result.Fail("please set the image name with jpg, jpeg or png format.");
+        return Result.Fail("please set the image name with jpg, jpeg or png Extention.");
     }
     
 }

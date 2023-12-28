@@ -3,26 +3,26 @@ using Movie_asp.ValueObjects;
 
 namespace Movie_asp.Entities;
 
-public class Actor
+public class Actor : IDomain
 {
-    public Actor(Id id, FullName fullName, Image img)
+    public Actor(Id id, FullName actorName, Image img)
     {
         Id = id;
-        FullName = fullName;
+        ActorName = actorName;
         Img = img;
     }
 
     public Id Id { get; private set; }
     [MaxLength(50)]
-    public FullName FullName { get; private set; }
+    public FullName ActorName { get; private set; }
     [MaxLength(120)]
     public Image Img { get; private set; }
-    public IList<MovieCollection> MovieCollections { get; private set; }
+    // public IList<MovieCollection> MovieCollections { get; private set; }
 
 
-    public void Update(FullName fullName, Image image)
+    public void Update(FullName actorName, Image image)
     {
-        FullName = fullName;
+        ActorName = actorName;
         Img = image;
     }
 }

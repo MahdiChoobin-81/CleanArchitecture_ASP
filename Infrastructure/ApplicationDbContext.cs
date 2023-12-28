@@ -1,8 +1,6 @@
 ﻿using Application.Data;
-using FluentResults;
 using Microsoft.EntityFrameworkCore;
 using Movie_asp.Entities;
-using Movie_asp.ValueObjects;
 
 namespace Infrastructure;
 
@@ -23,15 +21,16 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         
     }
     public DbSet<User> Users { get; set; }
-    public DbSet<Language> Languages { get; set; }
-    
-    public DbSet<Actor> Actors { get; set; }
-    
+    // public DbSet<Language> Languages { get; set; }
+    //
+    // public DbSet<Actor> Actors { get; set; }
+    //
     public DbSet<Genre> Genres { get; set; }
     
     public DbSet<Movie> Movies { get; set; }
+    public DbSet<MovieImage> MovieImages { get; set; }
+
+    // public DbSet<Country> Countries { get; set; }
     
-    public DbSet<Country> Countries { get; set; }
-    
-    public DbSet<MovieCollection> MovieCollections { get; set; }
+    // public DbSet<MovieCollection> MovieCollections { get; set; }
 }

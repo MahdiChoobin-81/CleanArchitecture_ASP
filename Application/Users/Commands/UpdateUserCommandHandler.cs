@@ -50,7 +50,8 @@ internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserComma
             return validation;
         }
 
-        user.Update(validation.User?.FullName!,
+        user.Update(
+            validation.User?.FullName!,
             validation.User?.Username!,
             validation.User?.Password!,
             validation.User?.Email!);

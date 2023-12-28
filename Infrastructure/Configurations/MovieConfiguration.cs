@@ -54,5 +54,6 @@ public class MovieConfiguration : IEntityTypeConfiguration<Movie>
                 mainImage => mainImage.Value,
                 value => Image.Create(value).Value!
             );
+
     }
 }

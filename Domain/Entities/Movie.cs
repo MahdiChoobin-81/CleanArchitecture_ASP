@@ -1,5 +1,6 @@
-using System.Collections;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using Movie_asp.Dto;
 using Movie_asp.ValueObjects;
 using Movie_asp.ValueObjects.Movie;
 
@@ -16,7 +17,7 @@ public class Movie
         Image mainImage,
         bool subtitle,
         CreatedAt createdAt
-        )
+    )
     {
         Id = id;
         MovieName = movieName;
@@ -41,10 +42,8 @@ public class Movie
     
     public bool Subtitle { get; private set; }
     public CreatedAt CreatedAt { get; private set; }
-    
-    public ICollection<MoiveImage> MoiveImages { get; private set; }
-    public IList<MovieCollection> MovieCollection { get; private set; } 
-
+    public List<MovieImage> MoiveImages { get; set; }
+    public List<Genre> Genres { get; set; }
 
     public void Update(
         MovieName movieName,
@@ -52,8 +51,7 @@ public class Movie
         MovieRate movieRate,
         ReleaseDate releaseDate,
         Image mainImage,
-        bool subtitle,
-        CreatedAt createdAt
+        bool subtitle
         )
     {
         MovieName = movieName;
@@ -62,7 +60,6 @@ public class Movie
         ReleaseDate = releaseDate;
         MainImage = mainImage;
         Subtitle = subtitle;
-        CreatedAt = createdAt;
     }
     
     

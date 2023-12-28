@@ -22,7 +22,12 @@ builder.Services.AddMediatR(cfg=>cfg.RegisterServicesFromAssemblies(typeof(AddUs
 builder.Services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-// builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+builder.Services.AddScoped<IMovieImageRepository, MovieImageRepository>();
+// builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+// builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+// builder.Services.AddScoped<IActorRepository, ActorRepository>();
 
 var app = builder.Build();
 
