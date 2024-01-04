@@ -11,6 +11,7 @@ public class GenreConfiguration : IEntityTypeConfiguration<Genre>
     public void Configure(EntityTypeBuilder<Genre> builder)
     {
         builder.HasKey(g => g.Id);
+        builder.HasIndex(g => g.GenreName);
 
         builder.Property(g => g.Id)
             .HasConversion(

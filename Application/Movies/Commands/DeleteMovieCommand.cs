@@ -5,4 +5,4 @@ using Movie_asp.ValueObjects;
 
 namespace Application.Movies.Commands;
 
-public record DeleteMovieCommand(Id id) : IRequest<MovieResultDto>;
+public record DeleteMovieCommand(Id Id) : IRequest<CustomGenericResult>;

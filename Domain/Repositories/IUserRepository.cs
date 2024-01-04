@@ -1,18 +1,19 @@
+using FluentResults;
 using Movie_asp.Entities;
 using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.User;
 
 namespace Movie_asp.Repositories;
 
-public interface IUserRepository 
+public interface IUserRepository : IRepository<User>
 {
-    void Add(User user);
+    Task<Result> Add(User user);
 
     void Remove(User user);
 
-    void Update(User user);
-
-    Task<User?> GetByIdAsync(Id id);
+    Task<Result> Update(User user, Email currentEmail, Username currentUsername);
 
     Task<IEnumerable<User>> GetAllAsync();
+
 
 }

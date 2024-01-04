@@ -1,9 +1,10 @@
 using Application.Data;
 using Application.Dto.Results;
+using Application.Validations;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Movie_asp.Entities;
+using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
 using Movie_asp.ValueObjects.Genre;
 
@@ -13,100 +14,112 @@ namespace Presentation.Controllers;
 [ApiController]
 
 public class GenreController : Controller
-{
 
-    private readonly IApplicationDbContext _applicationDbContext;
+{
+    
+    private readonly IGenreRepository _genreRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public GenreController(IApplicationDbContext applicationDbContext, IUnitOfWork unitOfWork)
+    public GenreController(IUnitOfWork unitOfWork, IGenreRepository genreRepository)
     {
-        _applicationDbContext = applicationDbContext;
         _unitOfWork = unitOfWork;
+        _genreRepository = genreRepository;
     }
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<GenreResultDto>> GetById(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> GetById(Guid id)
     {
-        var result = await _applicationDbContext.Genres
-            .FirstOrDefaultAsync(g => g.Id == new Id(id));
+        var result = await FindEntityRecordById<Genre>.Find(
+            _genreRepository, new Id(id));
 
-        if (result is null)
+        if (result.IsFailed)
         {
-            return NotFound(Result.Fail("There's no Genre with This Id : " + id).ToGenreResultDto(null));
+            return result.ToResult().ToCustomGenericResult(null, Movie_asp.StatusCode.NotFound);
         }
-
-        return Ok(Result.Ok().ToGenreResultDto(result));
+        var genre = result.Value;
+        return Result.Ok().ToCustomGenericResult(genre, Movie_asp.StatusCode.Ok);
         
     }
 
     [HttpGet]
-    public async Task<ActionResult<GenreResultDto>> GetAllAsync()
+    public async Task<IEnumerable<Genre>> GetAllAsync()
     {
-        var result = await _applicationDbContext.Genres.ToListAsync();
-
-        return Ok(result);
+        return await _genreRepository.GetAllAsync();
     }
 
     [HttpPost]
-    public async Task<ActionResult<GenreResultDto>> Post([FromBody] string genreName)
+    public async Task<ActionResult<CustomGenericResult>> Post([FromBody] string genreName)
     {
         var name = GenreName.Create(genreName);
 
         if (name.IsFailed)
         {
-            return BadRequest(name.ToResult().ToGenreResultDto(null));
+            return BadRequest(name.ToResult()
+                .ToCustomGenericResult(null, Movie_asp.StatusCode.BadRequest));
         }
 
 
         var genre = new Genre(
             new Id(Guid.NewGuid()),
-            name.Value!
-        );
+            name.Value);
+        
 
-        _applicationDbContext.Genres.Add(genre);
+        var result = await _genreRepository.Add(genre);
+        if (result.IsFailed)
+            return result.ToCustomGenericResult(null, Movie_asp.StatusCode.BadRequest);
         await _unitOfWork.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetById), new { id = genre.Id }, genre);
+        return CreatedAtAction(nameof(GetById), new { id = genre.Id.Value }, genre);
 
     }
 
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<GenreResultDto>> Delete(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> Delete(Guid id)
     {
-        var genre = await _applicationDbContext.Genres
-            .FirstOrDefaultAsync(g => g.Id == new Id(id));
+        var result = await FindEntityRecordById<Genre>.Find(
+            _genreRepository, new Id(id));
 
-        if (genre is null)
-            return NotFound(Result.Fail("There's no Genre with This Id : " + id).ToGenreResultDto(null));
-
-        _applicationDbContext.Genres.Remove(genre);
+        if (result.IsFailed)
+        {
+            return result.ToResult().ToCustomGenericResult(null, Movie_asp.StatusCode.NotFound);
+        }
+        var genre = result.Value;
+        
+        _genreRepository.Remove(genre);
         await _unitOfWork.SaveChangesAsync();
-        return Ok(genre);
+        return Result.Ok().ToCustomGenericResult(genre, Movie_asp.StatusCode.Ok);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<GenreResultDto>> Put(Guid id, [FromBody] string genreName)
+    public async Task<ActionResult<CustomGenericResult>> Put(Guid id, [FromBody] string genreName)
+    
     {
-        var genre = await _applicationDbContext.Genres
-            .FirstOrDefaultAsync(g => g.Id == new Id(id));
+        var findGenre = await FindEntityRecordById<Genre>.Find(
+            _genreRepository, new Id(id));
 
-        if (genre is null)
+        if (findGenre.IsFailed)
         {
-            return NotFound(Result.Fail("There's no Genre with This Id : " + id).ToGenreResultDto(null));
+            return findGenre.ToResult()
+                .ToCustomGenericResult(null, Movie_asp.StatusCode.NotFound);
         }
-
+        var genre = findGenre.Value;
+        var currentGenreName = genre.GenreName;
         var name = GenreName.Create(genreName);
 
         if (name.IsFailed)
-            return BadRequest(name.ToResult().ToGenreResultDto(null));
+            return BadRequest(name.ToResult()
+                .ToCustomGenericResult(null, Movie_asp.StatusCode.BadRequest));
         
-        genre.Update(name.Value!);
+        genre.Update(name.Value);
 
-        _applicationDbContext.Genres.Update(genre);
+        var result = await _genreRepository.Update(genre, currentGenreName);
+        if (result.IsFailed)
+            return result.ToCustomGenericResult(null, Movie_asp.StatusCode.BadRequest);
+        
         await _unitOfWork.SaveChangesAsync();
-        return Ok(genre);
+        return Result.Ok().ToCustomGenericResult(genre, Movie_asp.StatusCode.Ok);
         
     }
 

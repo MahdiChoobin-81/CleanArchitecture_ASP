@@ -3,9 +3,9 @@ namespace Movie_asp;
 public enum StatusCode
 {
 
-    Ok,
-    Created,
-    BadRequest,
-    NotFound
+    Ok = 200,
+    Created = 201,
+    BadRequest = 400,
+    NotFound = 404
  
 }

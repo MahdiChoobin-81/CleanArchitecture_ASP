@@ -1,37 +1,36 @@
 using Application.Data;
 using Application.Dto.Results;
 using Application.Validations;
+using Application.Validations.User;
 using FluentResults;
 using MediatR;
+using Movie_asp;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 
 namespace Application.Users.Query;
 
-public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserResultDto>
+public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, CustomGenericResult>
 {
     private readonly IUserRepository _userRepository;
-
+    
     public GetUserByIdQueryHandler(IUserRepository userRepository, IUnitOfWork unitOfWork)
     {
         _userRepository = userRepository;
     }
 
-    public async Task<UserResultDto> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+    public async Task<CustomGenericResult> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
-    
-        // TODO: find a better way to configure this validation.
-        var findUser =  UserValidation.FindUser(_userRepository, request.Id).Result;
-        
-        if (findUser.IsFailed)
+        var result = await FindEntityRecordById<User>.Find(
+            _userRepository, request.Id);
+
+        if (result.IsFailed)
         {
-            return findUser.ToResult().ToUserResultDto(null);
+            return result.ToResult().ToCustomGenericResult(null, StatusCode.NotFound);
         }
-        var user = findUser.Value;
+        var user = result.Value;
         
-        
-        
-        return Result.Ok().ToUserResultDto(user);
+        return Result.Ok().ToCustomGenericResult(user, StatusCode.Ok);
 
     }
 }

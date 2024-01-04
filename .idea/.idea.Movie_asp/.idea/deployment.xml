@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="win8047.site4now.net">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/Movie_asp.sln" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Domain.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Application.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Infrastructure.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Presentation.csproj" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/obj/Debug/net8.0/Application.GlobalUsings.g.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/obj/Debug/net8.0/Application.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/obj/Debug/net8.0/Application.GeneratedMSBuildEditorConfig.editorconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Data/IUnitOfWork.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Data/IApplicationDbContext.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/AddUserCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/AddUserCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/DeleteUserCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/DeleteUserCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/UpdateUserCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Commands/UpdateUserCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Query/GetUserByIdQuery.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Query/GetUserByIdQueryHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Query/GetAllUsersQuery.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Users/Query/GetAllUsersQueryHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../../Program Files/dotnet/sdk/8.0.100/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_8_default.globalconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Validations/UserValidation.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Validations/MovieListsValidation.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Validations/MovieValidation.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Validations/MovieImagesValidation.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Validations/FindOrMakeMovieImage.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/ErrorDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/UserResultDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/UserResultDtoExtensions.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/LanguageResultDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/LanguageResultDtoExtensions.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/ActorResultDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/ActorResultDtoExtensions.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/GenreResultDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/GenreResultDtoExtensions.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/MovieResultDtoExtensions.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Results/MovieResultDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Entities/UpdateUserDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Dto/Entities/UpdateMovieDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/AddMovieCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/AddMovieCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/DeleteMovieCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/DeleteMovieCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/UpdateMovieCommand.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Commands/UpdateMovieCommandHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Query/GetAllMoviesQuery.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Query/GetAllMovieQueryHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Query/GetMovieByIdQuery.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Application/Movies/Query/GetMovieByIdQueryHandler.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.GlobalUsings.g.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/obj/Debug/net8.0/Domain.GeneratedMSBuildEditorConfig.editorconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IUserRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IMovieRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IGenreRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/ILanguageRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IActorRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/ICountryRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Repositories/IMovieImageRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/User/Password.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/User/Username.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/User/Email.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Language/LanguageName.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Genre/GenreName.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Movie/MovieName.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Movie/MovieDescription.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Movie/MovieRate.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Movie/ReleaseDate.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Movie/Country.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Id.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/CreatedAt.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/FullName.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/Image.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/ValueObjects/CountryName.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/User.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/Language.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/Actor.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/Genre.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/Movie.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/Country.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/MovieCollection.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/MovieImage.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Entities/IDomain.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../../Program Files/dotnet/sdk/8.0.100/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_8_default.globalconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Dto/MovieDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Dto/GenreDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/Dto/MovieImageDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Domain/StatusCode.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/UserRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/MovieRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/GenreRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/ActorRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/LanguageRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/CountryRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Repositories/MovieImageRepository.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/UserConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/LanguageConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/ActorConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/GenreConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/MovieConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/CountryConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/MovieCollectionConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Configurations/MovieImageConfiguration.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/obj/Debug/net8.0/Infrastructure.GlobalUsings.g.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/obj/Debug/net8.0/Infrastructure.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/obj/Debug/net8.0/Infrastructure.GeneratedMSBuildEditorConfig.editorconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../../Program Files/dotnet/sdk/8.0.100/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_8_default.globalconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Migrations/20231229112805_newDB.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Migrations/ApplicationDbContextModelSnapshot.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/Migrations/20231229112805_newDB.Designer.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/ApplicationDbContext.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Infrastructure/UnitOfWork.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Controllers/UserController.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Controllers/LanguageController.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Controllers/ActorController.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Controllers/GenreController.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Controllers/MovieController.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Properties/launchSettings.json" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/obj/Debug/net8.0/Presentation.GlobalUsings.g.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/obj/Debug/net8.0/Presentation.AssemblyInfo.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/obj/Debug/net8.0/Presentation.GeneratedMSBuildEditorConfig.editorconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/../../../../Program Files/dotnet/sdk/8.0.100/Sdks/Microsoft.NET.Sdk/analyzers/build/config/analysislevel_8_default.globalconfig" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Dto/ActorDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Dto/AddUserDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Dto/UpdateUserDto.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/Program.cs" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/appsettings.Development.json" web="/" />
+            <mapping local="$PROJECT_DIR$/Presentation/appsettings.json" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

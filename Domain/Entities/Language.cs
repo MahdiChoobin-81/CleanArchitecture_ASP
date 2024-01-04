@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Movie_asp.ValueObjects;
 using Movie_asp.ValueObjects.Language;
 
@@ -16,7 +17,8 @@ public class Language : IDomain
     [MaxLength(50)]
     public LanguageName LanguageName { get; private set; }
     
-    // public IList<MovieCollection> MovieCollections { get; private set; }
+    [JsonIgnore]
+    public List<Movie> Movies { get; set; }
 
     public void Update(LanguageName languageName)
     {

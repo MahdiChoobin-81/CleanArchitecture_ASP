@@ -25,7 +25,6 @@ public class User
         Password = password;
         Email = email;
         CreatedAt = createdAt;
-    
     }
 
     public void Update(FullName fullName, Username username, Password password, Email email)
@@ -35,10 +34,5 @@ public class User
         Password = password;
         Email = email;
     }
-    
-    
-    
-
-
 
 }

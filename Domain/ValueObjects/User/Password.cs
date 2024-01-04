@@ -1,7 +1,6 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using FluentResults;
 
-namespace Movie_asp.ValueObjects;
+namespace Movie_asp.ValueObjects.User;
 // [ComplexType]
 public record Password
 {

@@ -1,13 +1,16 @@
 using Application.Data;
 using Application.Dto.Results;
 using Application.Validations;
+using Application.Validations.User;
 using FluentResults;
 using MediatR;
+using Movie_asp;
+using Movie_asp.Entities;
 using Movie_asp.Repositories;
 
 namespace Application.Users.Commands;
 
-internal sealed class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, UserResultDto>
+internal sealed class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, CustomGenericResult>
 {
 
     private readonly IUserRepository _userRepository;
@@ -19,22 +22,20 @@ internal sealed class DeleteUserCommandHandler : IRequestHandler<DeleteUserComma
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<UserResultDto> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    public async Task<CustomGenericResult> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
+        var findUser = await FindEntityRecordById<User>.Find(
+            _userRepository, request.Id);
 
-        // TODO : Better way to find user like DeleteMovieCommandHandler.cs
-        var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
-        
         if (findUser.IsFailed)
         {
-            return findUser.ToResult().ToUserResultDto(null);
+            return findUser.ToResult().ToCustomGenericResult(null, StatusCode.NotFound);
         }
-        
-        
         var user = findUser.Value;
+
         _userRepository.Remove(user);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return Result.Ok().ToUserResultDto(user);
+        return Result.Ok().ToCustomGenericResult(user, StatusCode.Ok);
     }
 }

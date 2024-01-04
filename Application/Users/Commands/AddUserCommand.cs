@@ -10,4 +10,4 @@ public record AddUserCommand(
     string FullName,
     string Username,
     string Password,
-    string Email) : IRequest<UserResultDto>;
+    string Email) : IRequest<CustomGenericResult>;

@@ -6,11 +6,11 @@ namespace Infrastructure;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 { 
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
     optionsBuilder.UseSqlServer(
         @"Server=localhost\SQLEXPRESS;Database=Test2;Trusted_Connection=True;TrustServerCertificate=True;");
-    
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,16 +21,13 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         
     }
     public DbSet<User> Users { get; set; }
-    // public DbSet<Language> Languages { get; set; }
-    //
-    // public DbSet<Actor> Actors { get; set; }
-    //
     public DbSet<Genre> Genres { get; set; }
+    public DbSet<Language> Languages { get; set; }
+    public DbSet<Country> Countries { get; set; }
     
+    public DbSet<Actor> Actors { get; set; }
     public DbSet<Movie> Movies { get; set; }
-    public DbSet<MovieImage> MovieImages { get; set; }
-
-    // public DbSet<Country> Countries { get; set; }
     
-    // public DbSet<MovieCollection> MovieCollections { get; set; }
+    public DbSet<MovieImage> MovieImages { get; set; }
+    
 }

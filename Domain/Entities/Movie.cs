@@ -1,6 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using Movie_asp.Dto;
 using Movie_asp.ValueObjects;
 using Movie_asp.ValueObjects.Movie;
 
@@ -44,6 +42,9 @@ public class Movie
     public CreatedAt CreatedAt { get; private set; }
     public List<MovieImage> MoiveImages { get; set; }
     public List<Genre> Genres { get; set; }
+    public List<Language> Languages { get; set; }
+    public List<Country> Countries { get; set; }
+    public List<Actor> Actors { get; set; }
 
     public void Update(
         MovieName movieName,

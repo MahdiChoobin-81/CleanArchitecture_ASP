@@ -6,4 +6,4 @@ using Movie_asp.ValueObjects;
 
 namespace Application.Movies.Query;
 
-public record GetMovieByIdQuery(Id id) : IRequest<MovieResultDto>;
+public record GetMovieByIdQuery(Id Id) : IRequest<CustomGenericResult>;

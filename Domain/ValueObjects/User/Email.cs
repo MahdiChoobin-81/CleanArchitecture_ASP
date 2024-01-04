@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 using FluentResults;
 
-namespace Movie_asp.ValueObjects;
+namespace Movie_asp.ValueObjects.User;
 
 public record Email
 {
@@ -30,6 +27,7 @@ public record Email
             return Result.Fail("Email Address is in a wrong pattern.");
         }
     
+        
         
     
         return new Email(email);

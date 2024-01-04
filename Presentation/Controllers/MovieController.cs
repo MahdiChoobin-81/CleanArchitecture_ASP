@@ -1,11 +1,10 @@
+using Application;
 using Application.Dto.Entities;
 using Application.Dto.Results;
 using Application.Movies.Commands;
 using Application.Movies.Query;
-using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Movie_asp.Dto;
 using Movie_asp.Entities;
 using Movie_asp.ValueObjects;
 
@@ -17,7 +16,7 @@ namespace Presentation.Controllers;
 public class MovieController : Controller
 {
 
-    private ISender _sender;
+    private readonly ISender _sender;
 
     public MovieController(ISender sender)
     {
@@ -25,20 +24,23 @@ public class MovieController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult<MovieResultDto>> Post([FromBody] MovieDto input)
+    public async Task<ActionResult<CustomGenericResult>> Post([FromBody] MovieDto input)
     {
         var command = new AddMovieCommand(
-            input.MoiveName,
+            input.MovieName,
             input.MovieDescription,
             input.MovieRate,
             input.ReleaseDate,
             input.MainImage,
             input.Subtitle,
-            input.Images,
-            input.GenreIds
+            input.MovieImages,
+            input.GenreIds,
+            input.LanguagesIds,
+            input.CountriesIds,
+            input.ActorsIds
             );
 
-        MovieResultDto result = await _sender.Send(command);
+        var result = await _sender.Send(command);
 
             switch (result.StatusCode)
             {
@@ -47,41 +49,44 @@ public class MovieController : Controller
                 case Movie_asp.StatusCode.NotFound:
                     return NotFound(result);
                 default:
-                    return Ok(result.Movie);
+                    var movieId = ObjectConverter<Movie>.Convert(result.Data).Id.Value;
+                    return CreatedAtAction(nameof(GetById), new{ id = movieId}, result);
+                
             }
+            
     }
 
 
     [HttpGet]
-    public async Task<ActionResult<MovieResultDto>> GetAll()
+    public async Task<IEnumerable<Movie>> GetAll()
     {
-        var movies = await _sender.Send(new GetAllMoviesQuery());
-        return Ok(movies);
+        return await _sender.Send(new GetAllMoviesQuery());
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<MovieResultDto>> GetById(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> GetById(Guid id)
     {
         var result = await _sender.Send(new GetMovieByIdQuery(new Id(id)));
-        if (result.StatusCode == Movie_asp.StatusCode.NotFound)
+        
+        if (result.IsFailed)
             return NotFound(result);
 
         return Ok(result);
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<MovieResultDto>> Delete(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> Delete(Guid id)
     {
         var result = await _sender.Send(new DeleteMovieCommand(new Id(id)));
 
-        if (result.StatusCode == Movie_asp.StatusCode.NotFound)
+        if (result.IsFailed)
             return NotFound(result);
 
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult<MovieResultDto>> Put(Guid id, [FromBody] UpdateMovieDto movieDto)
+    public async Task<ActionResult<CustomGenericResult>> Put(Guid id, [FromBody] MovieDto movieDto)
     {
         var result = await _sender.Send(new UpdateMovieCommand(new Id(id), movieDto));
     
@@ -90,9 +95,9 @@ public class MovieController : Controller
         
         if (result.StatusCode == Movie_asp.StatusCode.BadRequest)
             return BadRequest(result);
-
+    
         return Ok(result);
-
+    
     }
     
     

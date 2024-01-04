@@ -1,9 +1,7 @@
-using System.Collections;
+
+using Application.Dto.Entities;
 using Application.Dto.Results;
 using MediatR;
-using Movie_asp.Dto;
-using Movie_asp.Entities;
-using Movie_asp.ValueObjects;
 
 namespace Application.Movies.Commands;
 
@@ -14,6 +12,9 @@ public record AddMovieCommand(
     DateTime ReleaseDate,
     string MainImage,
     bool Subtitle,
-    List<string> Images,
-    List<Guid> GenresIds
-    ) : IRequest<MovieResultDto>;
+    List<MovieImageDto> MovieImages,
+    List<Guid> GenresIds,
+    List<Guid> LanguagesIds,
+    List<Guid> CountriesIds,
+    List<Guid> ActorsIds
+    ) : IRequest<CustomGenericResult>;

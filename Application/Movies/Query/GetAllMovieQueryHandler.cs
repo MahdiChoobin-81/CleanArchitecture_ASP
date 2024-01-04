@@ -16,8 +16,6 @@ public class GetAllMovieQueryHandler : IRequestHandler<GetAllMoviesQuery, IEnume
 
     public async Task<IEnumerable<Movie>> Handle(GetAllMoviesQuery request, CancellationToken cancellationToken)
     {
-        var movies = await _movieRepository.GetAllAsync();
-
-        return movies;
+        return await _movieRepository.GetAllAsync();
     }
 }

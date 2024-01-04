@@ -1,13 +1,15 @@
 using Application.Data;
 using Application.Dto.Results;
+using Application.Validations;
 using FluentResults;
 using MediatR;
 using Movie_asp;
+using Movie_asp.Entities;
 using Movie_asp.Repositories;
 
 namespace Application.Movies.Commands;
 
-public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand, MovieResultDto>
+public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand, CustomGenericResult>
 {
     
     private readonly IMovieRepository _movieRepository;
@@ -19,20 +21,23 @@ public class DeleteMovieCommandHandler : IRequestHandler<DeleteMovieCommand, Mov
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<MovieResultDto> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
+    public async Task<CustomGenericResult> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
     {
-        var movie = await _movieRepository.GetByIdAsync(request.id);
-        if (movie is null)
+        var findUser = await FindEntityRecordById<Movie>.Find(
+            _movieRepository, request.Id);
+
+        if (findUser.IsFailed)
         {
-            return Result.Fail("There's no Movie with This Id : " + request.id)
-                .ToMovieResultDto(null, StatusCode.NotFound);
+            return findUser.ToResult().ToCustomGenericResult(null, StatusCode.NotFound);
         }
+        
+        var movie = findUser.Value;
     
         _movieRepository.Remove(movie);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return Result.Ok().ToMovieResultDto(movie, StatusCode.Ok);
+        
+        return Result.Ok().ToCustomGenericResult(movie, StatusCode.Ok);
 
     }
 }

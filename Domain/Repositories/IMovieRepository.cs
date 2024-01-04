@@ -1,18 +1,19 @@
-using Movie_asp.Dto;
+using FluentResults;
 using Movie_asp.Entities;
-using Movie_asp.ValueObjects;
+using Movie_asp.ValueObjects.Movie;
 
 namespace Movie_asp.Repositories;
 
-public interface IMovieRepository 
+public interface IMovieRepository : IRepository<Movie>
 {
-    void Add(Movie movie);
+    Task<Result> Add(Movie movie);
 
     void Remove(Movie movie);
 
-    void Update(Movie movie);
-
-    Task<Movie?> GetByIdAsync(Id id);
+    Task<Result> Update(
+        Movie movie,
+        MovieName currentMovieName,
+        List<MovieImage> currentMovieImages);
 
     Task<IEnumerable<Movie>> GetAllAsync();
 

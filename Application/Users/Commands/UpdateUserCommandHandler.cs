@@ -1,8 +1,10 @@
 using Application.Data;
 using Application.Dto.Results;
 using Application.Validations;
+using Application.Validations.User;
 using FluentResults;
 using MediatR;
+using Movie_asp;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
@@ -10,7 +12,7 @@ using Movie_asp.ValueObjects.User;
 
 namespace Application.Users.Commands;
 
-internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserResultDto>
+internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, CustomGenericResult>
 {
 
     private readonly IUserRepository _userRepository;
@@ -22,48 +24,50 @@ internal sealed class UpdateUserCommandHandler : IRequestHandler<UpdateUserComma
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<UserResultDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
-    {
-        
-        var findUser = UserValidation.FindUser(_userRepository, request.Id).Result;
-        
+    public async Task<CustomGenericResult> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+    { 
+        var findUser = await FindEntityRecordById<User>.Find(
+            _userRepository, request.Id);
+
         if (findUser.IsFailed)
         {
-            return findUser.ToResult().ToUserResultDto(null);
+            return findUser.ToResult().ToCustomGenericResult(null, StatusCode.NotFound);
         }
-        var user = findUser.Value;
-        
-        
 
-        var id = user.Id;
+        var user = findUser.Value;
+        var currentUserEmail = user.Email;
+        var currentUsername = user.Username;
+
         var fullNameResult = FullName.Create(request.FullName);
         var usernameResult = Username.Create(request.Username);
         var passwordResult = Password.Create(request.Password);
         var emailResult = Email.Create(request.Email);
-        var createdAt = user.CreatedAt;
-        
-        
-        var validation = UserValidation.IsValid(id, fullNameResult, usernameResult, passwordResult, emailResult, createdAt);
+
+        var validation = ValidateUser.Validate(
+            fullNameResult,
+            usernameResult,
+            passwordResult,
+            emailResult
+            );
 
         if (validation.IsFailed)
-        {
-            return validation;
-        }
+            return validation.ToCustomGenericResult(null, StatusCode.BadRequest);
+
 
         user.Update(
-            validation.User?.FullName!,
-            validation.User?.Username!,
-            validation.User?.Password!,
-            validation.User?.Email!);
-
+            fullNameResult.Value,
+            usernameResult.Value,
+            passwordResult.Value,
+            emailResult.Value);
         
+        var result = await _userRepository.Update(user, currentUserEmail, currentUsername);
         
-        
-        _userRepository.Update(user);
+        if (result.IsFailed)
+            return result.ToCustomGenericResult(null, StatusCode.BadRequest);
         
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
 
-        return validation;
+        return Result.Ok().ToCustomGenericResult(user, StatusCode.Ok);
     }
 }

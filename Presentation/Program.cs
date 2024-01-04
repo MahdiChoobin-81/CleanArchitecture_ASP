@@ -3,16 +3,13 @@ using Application.Data;
 using Application.Users.Commands;
 using Infrastructure;
 using Infrastructure.Repositories;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Movie_asp.Repositories;
-using Presentation;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,10 +21,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IGenreRepository, GenreRepository>();
-builder.Services.AddScoped<IMovieImageRepository, MovieImageRepository>();
-// builder.Services.AddScoped<ICountryRepository, CountryRepository>();
-// builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
-// builder.Services.AddScoped<IActorRepository, ActorRepository>();
+builder.Services.AddScoped<ICountryRepository, CountryRepository>();
+builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
 
 var app = builder.Build();
 

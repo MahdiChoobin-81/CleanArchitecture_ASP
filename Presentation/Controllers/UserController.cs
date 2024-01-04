@@ -1,3 +1,4 @@
+using Application;
 using Application.Data;
 using Application.Dto.Results;
 using Application.Users.Commands;
@@ -18,34 +19,33 @@ namespace Presentation.Controllers;
 
 public class UserController : Controller
 {
-    private IMediator _mediator;
+    private readonly ISender _sender;
 
-    public UserController(IMediator mediator)
+    public UserController(IMediator sender)
     {
-        _mediator = mediator;
+        _sender = sender;
     }
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<UserResultDto>> GetById(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> GetById(Guid id)
     {
-        var result = await _mediator.Send(new GetUserByIdQuery(new Id(id)));
+        var result = await _sender.Send(new GetUserByIdQuery(new Id(id)));
 
         if (result.IsFailed)
-        {
             return NotFound(result);
-        }
+        
         return Ok(result);
     }
 
     [HttpGet]
     public async Task<IEnumerable<User>> GetAll()
     {
-        return await _mediator.Send(new GetAllUsersQuery());
+        return await _sender.Send(new GetAllUsersQuery());
     }
 
     [HttpPost]
-    public async Task<ActionResult<UserResultDto>> Post([FromBody] AddUserDto value)
+    public async Task<ActionResult<CustomGenericResult>> Post([FromBody] UserDto value)
      {
         var command = new AddUserCommand(
             value.FullName,
@@ -53,32 +53,34 @@ public class UserController : Controller
             value.Password,
             value.Email
             );
-        UserResultDto result = await _mediator.Send(command);
+        var result = await _sender.Send(command);
 
         if (result.IsFailed)
         {
             return BadRequest(result);
         }
-        return CreatedAtAction(nameof(GetById), new{ id = result.User.Id.Value}, result.User);
+
+        var userId = ObjectConverter<User>.Convert(result.Data).Id.Value;
+        // var userId2 = ((User)result.Data).Id.Value;
+        
+        return CreatedAtAction(nameof(GetById), new{ id = userId}, result);
     }
     
     
     [HttpDelete("{id}")]
-    public async Task<ActionResult<UserResultDto>> Delete(Guid id)
+    public async Task<ActionResult<CustomGenericResult>> Delete(Guid id)
     {
-        var result = await _mediator.Send(new DeleteUserCommand(new Id(id)));
+        var result = await _sender.Send(new DeleteUserCommand(new Id(id)));
 
         if (result.IsFailed)
-        {
             return NotFound(result);
-        }
         
         return Ok(result);
     }
     
     
     [HttpPut("{id}")]
-    public async Task<ActionResult<UserResultDto>> Put(Guid id,[FromBody] UpdateUserDto value)
+    public async Task<ActionResult<CustomGenericResult>> Put(Guid id,[FromBody] UserDto value)
     {
         var command = new UpdateUserCommand(
             new Id(id),
@@ -88,7 +90,7 @@ public class UserController : Controller
             value.Email
             );
     
-        var result = await _mediator.Send(command);
+        var result = await _sender.Send(command);
 
         if (result.IsFailed)
         {

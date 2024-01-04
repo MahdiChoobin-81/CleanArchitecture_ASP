@@ -1,4 +1,5 @@
 using Application.Dto.Results;
+using Application.Validations;
 using FluentResults;
 using MediatR;
 using Movie_asp;
@@ -8,7 +9,7 @@ using Movie_asp.ValueObjects;
 
 namespace Application.Movies.Query;
 
-public class GetMovieByIdQueryHandler : IRequestHandler<GetMovieByIdQuery, MovieResultDto>
+public class GetMovieByIdQueryHandler : IRequestHandler<GetMovieByIdQuery, CustomGenericResult>
 {
     private readonly IMovieRepository _movieRepository;
 
@@ -17,15 +18,17 @@ public class GetMovieByIdQueryHandler : IRequestHandler<GetMovieByIdQuery, Movie
         _movieRepository = movieRepository;
     }
 
-    public async Task<MovieResultDto> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
+    public async Task<CustomGenericResult> Handle(GetMovieByIdQuery request, CancellationToken cancellationToken)
     {
-        var movie = await _movieRepository.GetByIdAsync(request.id);
-        if (movie is null)
-        {
-            return Result.Fail("There's no Movie with This Id : " + request.id)
-                .ToMovieResultDto(null, StatusCode.NotFound);
-        }
+        var result = await FindEntityRecordById<Movie>.Find(
+            _movieRepository, request.Id);
 
-        return Result.Ok().ToMovieResultDto(movie, StatusCode.Ok);
+        if (result.IsFailed)
+        {
+            return result.ToResult().ToCustomGenericResult(null, StatusCode.NotFound);
+        }
+        var movie = result.Value;
+
+        return Result.Ok().ToCustomGenericResult(movie, StatusCode.Ok);
     }
 }

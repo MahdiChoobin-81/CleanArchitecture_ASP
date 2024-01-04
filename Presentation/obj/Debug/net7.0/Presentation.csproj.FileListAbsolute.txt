@@ -79,4 +79,3 @@ C:\Users\Sepidar\RiderProjects\Movie_asp\Presentation\obj\Debug\net7.0\Presentat
 C:\Users\Sepidar\RiderProjects\Movie_asp\Presentation\obj\Debug\net7.0\Presentation.genruntimeconfig.cache
 C:\Users\Sepidar\RiderProjects\Movie_asp\Presentation\obj\Debug\net7.0\ref\Presentation.dll
 C:\Users\Sepidar\RiderProjects\Movie_asp\Presentation\bin\Debug\net7.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\Sepidar\RiderProjects\Movie_asp\Presentation\bin\Debug\net7.0\FluentApiGenericRepository.dll

@@ -3,8 +3,10 @@ using Application.Data;
 using Application.Dto.Results;
 using Application.Users.Query;
 using Application.Validations;
+using Application.Validations.User;
 using FluentResults;
 using MediatR;
+using Movie_asp;
 using Movie_asp.Entities;
 using Movie_asp.Repositories;
 using Movie_asp.ValueObjects;
@@ -12,7 +14,7 @@ using Movie_asp.ValueObjects.User;
 
 namespace Application.Users.Commands;
 
-internal sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, UserResultDto>
+internal sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, CustomGenericResult>
 {
 
     private readonly IUserRepository _userRepository;
@@ -25,31 +27,30 @@ internal sealed class AddUserCommandHandler : IRequestHandler<AddUserCommand, Us
     }
     
     
-    public async Task<UserResultDto> Handle(AddUserCommand request, CancellationToken cancellationToken)
+    public async Task<CustomGenericResult> Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
-        var id = new Id(Guid.NewGuid());
-        var fullNameResult = FullName.Create(request.FullName);
-        var usernameResult = Username.Create(request.Username);
-        var passwordResult = Password.Create(request.Password);
-        var emailResult    = Email.Create(request.Email);
-        var createdAt = new CreatedAt(DateTime.Now);
-
-
-
-        var validation = UserValidation.IsValid(id, fullNameResult, usernameResult, passwordResult, emailResult, createdAt);
         
-        if (validation.IsFailed)
-        {
-            return validation;
-        }
 
-        var user = validation.User;
-         _userRepository.Add(user);
+        var createUserResult = CreateUserInstance.Create(
+            request.FullName,
+            request.Username,
+            request.Password,
+            request.Email);
+
+        if (createUserResult.IsFailed)
+            return createUserResult.ToResult().ToCustomGenericResult(null, StatusCode.BadRequest);
         
-         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        var user = createUserResult.Value;
+     
+        var result = await _userRepository.Add(user);
+
+        if (result.IsFailed)
+            return result.ToCustomGenericResult(null, StatusCode.BadRequest);
         
         
-         return validation;
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
+        
+        return Result.Ok().ToCustomGenericResult(user, StatusCode.Created);
   
     }
 }

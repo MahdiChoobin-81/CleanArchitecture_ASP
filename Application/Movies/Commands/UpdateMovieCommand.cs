@@ -5,4 +5,4 @@ using Movie_asp.ValueObjects;
 
 namespace Application.Movies.Commands;
 
-public record UpdateMovieCommand(Id Id, UpdateMovieDto UpdateMovieDto) : IRequest<MovieResultDto>;
+public record UpdateMovieCommand(Id Id, MovieDto MovieDto) : IRequest<CustomGenericResult>;

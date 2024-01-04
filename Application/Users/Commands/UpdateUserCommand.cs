@@ -12,6 +12,6 @@ public record UpdateUserCommand(
     string Username,
     string Password,
     string Email
-    ) : IRequest<UserResultDto>;
+    ) : IRequest<CustomGenericResult>;
 
     
