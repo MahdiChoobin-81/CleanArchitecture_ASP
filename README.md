@@ -39,8 +39,14 @@
 
 # Custom tools I made
 
+**- FindDependentTableRecordsOfMovieTable class :**
+ its a generic class that takes list of guids(our table ids) and another input is one repository of type an interface **IRepository**(its a super class for my all repositories); this class will check that all ids are exists using inputs, foreach loop and another generic class named **FindEntityRecordById**(this class will make error message if there's no any record, with our ids) and in the end if we had no any error we will return all records content(wich we find them through ids) in **Result**(fluentResult library) format with success status. 
 
-  
+**- FindEntityRecordById class :**
+its a generic class with two input, one of them is an id of type **Id**(its a _ValueObject_) and another one is an interface called **IRepository**, actually its a supper class for all repositories. this class will send a request to The relevant repository and if there's no any record with the id, our class will make an error message and returns it in **Result**(fluentResult library) format with failed status. Otherwise the record will be returned in **Result** format with success status.
+
+**- ObjectConverter class :**
+  IT IS also a generic class😊 that has a method named **Convert**, our method takes an object and will convert it to type parameter( <T> ) Done.
 
   # Program rules
   ### Unique Fields :
