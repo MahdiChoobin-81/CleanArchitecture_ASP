@@ -10,9 +10,7 @@
   
    **- Repository And Unit Of Work Patterns**
    
-   **- Dependency Injection**
-   
-   **- Solid Principle's : Single-Responsibility**
+   **- Solid Principle's : Single-Responsibility, Dependency Inversion(using Dependency Injection)**
    
    **- OOP concepts: Inheritance, Abstraction**
    
@@ -30,7 +28,7 @@
   
 
 # Project Capabilities
-  **- CRUD Operation.**
+  **- CRUD Operation(Considering the Uniqueness of Domain fields in Add and Update operations).**
   
   **- Database Relationships : Many_to_Many And One_to_Many.**
   
