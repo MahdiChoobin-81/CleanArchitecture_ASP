@@ -1,38 +1,41 @@
 
 # Technologies used in the Project
-  **- Clean Architecture**
+  **- Clean Architecture.**
   
-  **- Value Objects (Domain Driven Design)**
+  **- Value Objects (Domain Driven Design).**
   
-  **- CQRS Pattern**
+  **- CQRS Pattern.**
   
-  **- using Result class Insteed of Throwing Exceptions.(FluentResult library)**
+  **- using Result class Insteed of Throwing Exceptions.(FluentResult library).**
   
-   **- Repository And Unit Of Work Patterns**
+   **- Repository And Unit Of Work Patterns.**
    
-   **- Solid Principle's : Single-Responsibility, Dependency Inversion(using Dependency Injection)**
+   **- Solid Principle's : Single-Responsibility, Dependency Inversion(using Dependency Injection).**
    
-   **- OOP concepts: Inheritance, Abstraction**
+   **- OOP concepts: Inheritance, Abstraction.**
    
    **- Custom Generic Classes.**
    
-   **- Migrations**
+   **- Migrations.**
    
-   **- Record**
+   **- Record.**
    
-   **- Dto**
+   **- Dto.**
    
-   **- Enum**
+   **- Enum.**
 
 
   
 
 # Project Capabilities
-  **- CRUD Operation(Considering the Uniqueness of Domain fields in Add and Update operations).**
+  **- CRUD Operation (Considering the Uniqueness of Domain fields in Add and Update operations).**
   
   **- Database Relationships : Many_to_Many And One_to_Many.**
   
   **- All Endpoint's, CQRS structure and Repositories(Except Remove method) Are Asynchronous.**
+
+
+# Diagrams :
   
 
   # Program rules
