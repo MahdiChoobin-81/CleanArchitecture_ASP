@@ -1,16 +1,16 @@
 
 # Technologies used in the Project
-  ### Clean Architecture
-  ### Value Objects (Domain Driven Design)
-  ### CQRS Pattern
-  ### using Result class Insteed of Throwing Exceptions.(FluentResult library)
-  ### Repository And Unit Of Work Patterns
-  ### Dependency Injection
-  ### Solid Principle's : Single-Responsibility
-  ### Custom Generic Classes.
-  ### Migrations
-  ### Dto
-  ### Enum
+  ### - Clean Architecture
+  ### - Value Objects (Domain Driven Design)
+  ### - CQRS Pattern
+  ### - using Result class Insteed of Throwing Exceptions.(FluentResult library)
+  ### - Repository And Unit Of Work Patterns
+  ### - Dependency Injection
+  ### - Solid Principle's : Single-Responsibility
+  ### - Custom Generic Classes.
+  ### - Migrations
+  ### - Dto
+  ### - Enum
 
 
   
