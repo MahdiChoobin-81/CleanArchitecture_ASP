@@ -46,7 +46,7 @@
 its a generic class with two input, one of them is an id of type **Id**(its a _ValueObject_) and another one is an interface called **IRepository**, actually its a supper class for all repositories. this class will send a request to The relevant repository and if there's no any record with the id, our class will make an error message and returns it in **Result**(fluentResult library) format with failed status. Otherwise the record will be returned in **Result** format with success status.
 
 **- ObjectConverter class :**
-  IT IS also a generic class😊 that has a method named **Convert**, our method takes an object and will convert it to class's type parameter( _T_ ) Done.
+  IT IS also a generic class😊 that has a method named **Convert**, our method takes an object and will convert it to type parameter( _T_ ) of the class. Done
 
   # Program rules
   ### Unique Fields :
