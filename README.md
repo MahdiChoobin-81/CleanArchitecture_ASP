@@ -28,7 +28,7 @@
   
 
 # Project Capabilities
-  **- CRUD Operation (Considering the Uniqueness of Domain fields in Add and Update operations Without Throwing Exceptions).**
+  **- CRUD Operation (Considering the Uniqueness of Domain fields in Add and Update operations Without Throwing Exception).**
   
   **- Database Relationships : Many_to_Many And One_to_Many.**
   
