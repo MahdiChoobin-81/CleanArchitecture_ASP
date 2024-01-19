@@ -10,7 +10,7 @@
   
    **- Repository And Unit Of Work Patterns.**
    
-   **- Solid Principle's : Single-Responsibility, Dependency Inversion(using Dependency Injection).**
+   **- Solid Principle's : Single-Responsibility, Open–closed,  Liskov substitution, Interface segregation, Dependency Inversion(using Dependency Injection).**
    
    **- OOP concepts: Inheritance, Abstraction.**
    
@@ -36,6 +36,27 @@
 
 
 # Diagrams :
+  > [!NOTE]
+  > I Built Sequence Diagram just for **User** Domain because it's _simple_ and _Good Idea_ to see how my code works, but The Mechanism of the **Movie** Domain is more _**complicated**_.
+
+### Sequence Diagram's :
+
+   [Create User](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/SequenceDiagrams/Images/sequenceDiagram_user_create.png)
+   
+   [Update User](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/SequenceDiagrams/Images/sequenceDiagram_user_update.png)
+   
+   [Delete User](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/SequenceDiagrams/Images/sequenceDiagram_user_delete.png)
+   
+   [Get User By Id](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/SequenceDiagrams/Images/sequenceDiagram_user_getById.png)
+   
+   [Get All User's](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/SequenceDiagrams/Images/sequenceDiagram_user_getAll.png)
+    
+### Class Diagram's :
+
+   [Domain's](https://github.com/MahdiChoobin-81/CleanArchitecture_ASP/blob/master/Diagrams/ClassDiagrams/classDiagram_Domains.png)
+
+
+
 
 # Custom tools I made
 
