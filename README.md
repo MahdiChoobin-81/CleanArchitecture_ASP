@@ -10,7 +10,7 @@
   
    **- Repository And Unit Of Work Patterns.**
    
-   **- Solid Principle's : zSingle-Responsibility, Open–closed,  Liskov substitution, Interface segregation, Dependency Inversion(using Dependency Injection).**
+   **- Solid Principle's : Single-Responsibility, Open–closed,  Liskov substitution, Interface segregation, Dependency Inversion(using Dependency Injection).**
    
    **- OOP concepts: Inheritance, Abstraction.**
    
