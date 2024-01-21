@@ -31,6 +31,7 @@ public class CreateMovieInstance
             releaseDate,
             mainImage
             );
+        
 
         if (movieValidation.IsFailed)
             return movieValidation;

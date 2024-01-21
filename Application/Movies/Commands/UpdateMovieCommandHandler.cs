@@ -59,7 +59,7 @@ public class UpdateMovieCommandHandler : IRequestHandler<UpdateMovieCommand, Cus
         var subtitle    = request.MovieDto.Subtitle;
         
         
-        List<MovieImageDto> movieImageDtos = request.MovieDto.MovieImages;
+        List<MovieImageDto> movieImageDtoList = request.MovieDto.MovieImages;
         
         // validate values for update movie
         var movieValidation = ValidateMovie.Validate(
@@ -104,7 +104,7 @@ public class UpdateMovieCommandHandler : IRequestHandler<UpdateMovieCommand, Cus
         
         
         // create movie images.
-        var createMoveImagesResult = CreateMovieImageInstance.Create(movieImageDtos);
+        var createMoveImagesResult = movieImageDtoList.CreateImageInstances();
         
         if(createMoveImagesResult.IsFailed)
             return createMoveImagesResult.ToResult().ToCustomGenericResult(null, StatusCode.BadRequest);

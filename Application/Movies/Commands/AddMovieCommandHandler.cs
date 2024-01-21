@@ -50,7 +50,7 @@ public class AddMovieCommandHandler : IRequestHandler<AddMovieCommand, CustomGen
         if (createMovieResult.IsFailed)
             return createMovieResult.ToResult().ToCustomGenericResult(null, StatusCode.BadRequest);
 
-        var createMoveImagesResult = CreateMovieImageInstance.Create(request.MovieImages);
+        var createMoveImagesResult = request.MovieImages.CreateImageInstances();
         
         if(createMoveImagesResult.IsFailed)
             return createMoveImagesResult.ToResult().ToCustomGenericResult(null, StatusCode.BadRequest);

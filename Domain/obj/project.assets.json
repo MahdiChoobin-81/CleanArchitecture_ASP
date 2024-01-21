@@ -2657,11 +2657,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sepidar\\RiderProjects\\Movie_asp\\Domain\\Domain.csproj",
+      "projectUniqueName": "C:\\Users\\Sepidar\\RiderProjects\\Github\\001_CleanArchitecture_ASP\\CleanArchitecture_ASP\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "C:\\Users\\Sepidar\\RiderProjects\\Movie_asp\\Domain\\Domain.csproj",
+      "projectPath": "C:\\Users\\Sepidar\\RiderProjects\\Github\\001_CleanArchitecture_ASP\\CleanArchitecture_ASP\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\Sepidar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sepidar\\RiderProjects\\Movie_asp\\Domain\\obj\\",
+      "outputPath": "C:\\Users\\Sepidar\\RiderProjects\\Github\\001_CleanArchitecture_ASP\\CleanArchitecture_ASP\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sepidar\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2717,7 +2717,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

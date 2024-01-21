@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "n6nR5TSJt4EYRu+RX5g3+WSH91N20iW2vDQ3KAXZPBsbJD9sOp/hsImdk2FTtsycPGEMGmIdNW59aMlUkkAlxw==",
+  "dgSpecHash": "4vJeZkn51A7k/1Wkm1IXahAsvq66EYg/3AB79a7/o42S4zKwvQ20r8l3aO8CcR26CInZPQ4zmdMIHhh0iLK21w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Sepidar\\RiderProjects\\Movie_asp\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Users\\Sepidar\\RiderProjects\\Github\\001_CleanArchitecture_ASP\\CleanArchitecture_ASP\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Sepidar\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\Sepidar\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

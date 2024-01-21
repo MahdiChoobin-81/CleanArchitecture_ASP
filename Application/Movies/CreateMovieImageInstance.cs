@@ -8,9 +8,10 @@ namespace Application.Movies;
 
 public static class CreateMovieImageInstance
 {
-    public static Result<List<MovieImage>> Create(List<MovieImageDto> rowMovieImages)
+    public static Result<List<MovieImage>> CreateImageInstances(this List<MovieImageDto> rowMovieImages)
     {
-        var movieImagesValidation = ValidateMovieImage.Validate(rowMovieImages);
+        
+        var movieImagesValidation = rowMovieImages.ValidateImage();
 
         if (movieImagesValidation.IsFailed)
             return movieImagesValidation;

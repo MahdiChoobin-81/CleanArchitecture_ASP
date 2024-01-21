@@ -6,7 +6,7 @@ namespace Application.Validations.Movie;
 
 public static class ValidateMovieImage
 {
-    public static Result Validate(List<MovieImageDto> rowMovieImages)
+    public static Result ValidateImage(this List<MovieImageDto> rowMovieImages)
     {
         foreach (var movieImage in rowMovieImages)
         {
